@@ -25,11 +25,11 @@ public class InventoryBar : Panel
 
 		for ( int i = 0; i < slots.Count; i++ )
 		{
-			UpdateIcon( player.Inventory.GetSlot( i ), slots[i], i );
+			UpdateIcon( player.Inventory.GetSlot( i ), slots[i] );
 		}
 	}
 
-	private static void UpdateIcon( Entity ent, InventoryIcon inventoryIcon, int i )
+	private static void UpdateIcon( Entity ent, InventoryIcon inventoryIcon )
 	{
 		if ( ent == null )
 		{
@@ -43,7 +43,7 @@ public class InventoryBar : Panel
 	}
 
 	[Event( "buildinput" )]
-	public void ProcessClientInput( InputBuilder input )
+	public static void ProcessClientInput( InputBuilder input )
 	{
 		var player = Local.Pawn as Player;
 		if ( player == null )

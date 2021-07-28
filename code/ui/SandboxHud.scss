@@ -103,7 +103,7 @@ InventoryIcon
 		text-align: center;
 		left: 0;
 		right: 0;
-		font-size: 10px;
+		font-size: 12.5px;
 		position: absolute;
 		bottom: 0;
 		opacity: 0.7;
@@ -121,22 +121,35 @@ InventoryIcon
 		left: 5px;
 	}
 
+	.magazine-number {
+		font-size: 15px;
+		color: white;
+		font-weight: 500;
+		opacity: 0;
+		position: absolute;
+		top: 1px;
+		right: 5px;
+	}
+
 	&.active {
 		background-color: rgba( orange, 0.5 );
 		transition: all 0.1s ease-out;
 		width: 100px;
 		height: 100px;
 
+		.item-name {
+			color: yellow;
+			transition: all 0.1s ease-out;
+			font-size: 15px;
+		}
+
 		.slot-number {
 			color: yellow;
 			opacity: 0.6;
 		}
 
-		.item-name {
-			color: yellow;
-			opacity: 1;
-			transition: all 0.1s ease-out;
-			font-size: 13px;
+		.magazine-number {
+			opacity: 0.5;
 		}
 	}
 }
