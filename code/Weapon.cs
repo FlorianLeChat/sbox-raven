@@ -3,7 +3,6 @@
 public partial class Weapon : BaseWeapon, IUse
 {
 	public virtual float ReloadTime => 3.0f;
-
 	public PickupTrigger PickupTrigger { get; protected set; }
 
 	[Net, Predicted]
@@ -75,8 +74,6 @@ public partial class Weapon : BaseWeapon, IUse
 	public virtual void StartReloadEffects()
 	{
 		ViewModelEntity?.SetAnimBool( "reload", true );
-
-		// TODO - player third person model reload
 	}
 
 	public override void CreateViewModel()
