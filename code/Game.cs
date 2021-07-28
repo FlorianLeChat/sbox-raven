@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-[Library( "sandbox", Title = "Sandbox" )]
+[Library( "sandbox", Title = "Raven" )]
 partial class SandboxGame : Game
 {
 	public SandboxGame()
