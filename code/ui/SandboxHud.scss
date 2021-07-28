@@ -1,13 +1,25 @@
 Health
 {
 	position: absolute;
-	background-color: rgba( black, 0.5 );
-	right: 100px;
-	bottom: 48px;
+	background-color: rgba(25, 25, 25, 0.5);
+	right: 50px;
+	bottom: 100px;
+	font-family: Roboto;
 	font-size: 40px;
-	font-weight: bold;
-	color: white;
-	height: 80px;
+	color: red;
+	padding: 0 20px;
+	align-items: center;
+}
+
+Armor
+{
+	position: absolute;
+	background-color: rgba(25, 25, 25, 0.5);
+	right: 50px;
+	bottom: 50px;
+	font-family: Roboto;
+	font-size: 40px;
+	color: blue;
 	padding: 0 20px;
 	align-items: center;
 }
@@ -59,13 +71,11 @@ rootpanel
 		background-color: rgba( #333, 0.9 );
 	}
 
-
 	&.devcamera
 	{
 		display: none;
 	}
 }
-
 
 InventoryBar
 {
@@ -80,17 +90,16 @@ InventoryIcon
 {
 	width: 80px;
 	height: 80px;
-	background-color: rgba( #222, 0.3 );
+	background-color: rgba(25, 25, 25, 0.5);
 	margin: 0px 2px;
 	position: relative;
 	transition: all 0.2s ease-in-out;
 	margin-top: 10px;
-	font-family: poppins;
+	font-family: Roboto;
 
-	.item-name
-	{
+	.item-name {
 		padding: 5px;
-		color: white;
+		color: deepskyblue;
 		text-align: center;
 		left: 0;
 		right: 0;
@@ -102,31 +111,29 @@ InventoryIcon
 		text-shadow: 1px 1px 5px black;
 	}
 
-	.slot-number
-	{
+	.slot-number {
 		font-size: 25px;
-		color: black;
+		color: white;
 		font-weight: 900;
-		opacity: 0.3;
+		opacity: 0.2;
 		position: absolute;
 		top: 1px;
-		right: 5px;
+		left: 5px;
 	}
 
-	&.active
-	{
-		background-color: rgba( #0094ff, 0.5 );
+	&.active {
+		background-color: rgba( orange, 0.5 );
 		transition: all 0.1s ease-out;
 		width: 100px;
 		height: 100px;
 
-		.slot-number
-		{
-			color: #275576;
+		.slot-number {
+			color: yellow;
+			opacity: 0.6;
 		}
 
-		.item-name
-		{
+		.item-name {
+			color: yellow;
 			opacity: 1;
 			transition: all 0.1s ease-out;
 			font-size: 13px;
