@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-[Library( "weapon_pistol", Title = "Pistol", Spawnable = true )]
+[Library( "weapon_pistol", Title = "Pistolet 9mm", Spawnable = true )]
 partial class Pistol : Weapon
 {
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
@@ -26,7 +26,7 @@ partial class Pistol : Weapon
 	{
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
-		
+
 		(Owner as AnimEntity)?.SetAnimBool( "b_attack", true );
 
 		ShootEffects();

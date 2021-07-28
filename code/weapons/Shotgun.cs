@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-[Library( "weapon_shotgun", Title = "Shotgun", Spawnable = true )]
+[Library( "weapon_shotgun", Title = "Fusil à pompe", Spawnable = true )]
 partial class Shotgun : Weapon
 {
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
@@ -83,7 +83,7 @@ partial class Shotgun : Weapon
 
 		if ( IsLocalPawn )
 		{
-			new Sandbox.ScreenShake.Perlin( 3.0f, 3.0f, 3.0f );
+			_ = new Sandbox.ScreenShake.Perlin( 3.0f, 3.0f, 3.0f );
 		}
 	}
 

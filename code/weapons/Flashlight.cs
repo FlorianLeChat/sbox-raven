@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-[Library( "weapon_flashlight", Title = "Flashlight", Spawnable = true )]
+[Library( "weapon_flashlight", Title = "Lampe torche", Spawnable = true )]
 partial class Flashlight : Weapon
 {
 	public override string ViewModelPath => "weapons/rust_flashlight/v_rust_flashlight.vmdl";
