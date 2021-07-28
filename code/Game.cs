@@ -12,13 +12,17 @@ partial class SandboxGame : Game
 		}
 	}
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( Client client )
 	{
-		base.ClientJoined( cl );
+		base.ClientJoined( client );
+
 		var player = new SandboxPlayer();
 		player.Respawn();
 
-		cl.Pawn = player;
+		client.Pawn = player;
+
+		// Raven-side
+		Event.Run( "OnClientJoined", client );
 	}
 
 	protected override void OnDestroy()
@@ -45,16 +49,16 @@ partial class SandboxGame : Game
 		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 		ent.SetModel( modelname );
 
-		// Drop to floor
 		if ( ent.PhysicsBody != null && ent.PhysicsGroup.BodyCount == 1 )
 		{
 			var p = ent.PhysicsBody.FindClosestPoint( tr.EndPos );
 
 			var delta = p - tr.EndPos;
 			ent.PhysicsBody.Position -= delta;
-			//DebugOverlay.Line( p, tr.EndPos, 10, false );
 		}
 
+		// Raven-side
+		Event.Run( "OnPropSpawned", modelname );
 	}
 
 	[ServerCmd( "spawn_entity" )]
@@ -86,7 +90,8 @@ partial class SandboxGame : Game
 		ent.Position = tr.EndPos;
 		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) );
 
-		//Log.Info( $"ent: {ent}" );
+		// Raven-side
+		Event.Run( "OnEntitySpawned", entName );
 	}
 
 	public override void DoPlayerNoclip( Client player )
@@ -104,5 +109,8 @@ partial class SandboxGame : Game
 				basePlayer.DevController = new NoclipController();
 			}
 		}
+
+		// Raven-side
+		Event.Run( "OnPlayerNoClip", player );
 	}
 }

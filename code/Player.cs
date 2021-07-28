@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
 
 partial class SandboxPlayer : Player
 {
@@ -6,6 +7,8 @@ partial class SandboxPlayer : Player
 	private TimeSince timeSinceJumpReleased;
 
 	private DamageInfo lastDamage;
+
+	public Dictionary<ulong, int> Positions { get; private set; }
 
 	[Net] public PawnController VehicleController { get; set; }
 	[Net] public PawnAnimator VehicleAnimator { get; set; }
@@ -57,6 +60,9 @@ partial class SandboxPlayer : Player
 		Inventory.Add( new Flashlight() );
 
 		base.Respawn();
+
+		// Raven-side
+		Event.Run( "OnPlayerSpawned" );
 	}
 
 	public override void OnKilled()
@@ -65,8 +71,8 @@ partial class SandboxPlayer : Player
 
 		if ( lastDamage.Flags.HasFlag( DamageFlags.Vehicle ) )
 		{
-			Particles.Create( "particles/impact.flesh.bloodpuff-big.vpcf", lastDamage.Position );
-			Particles.Create( "particles/impact.flesh-big.vpcf", lastDamage.Position );
+			_ = Particles.Create( "particles/impact.flesh.bloodpuff-big.vpcf", lastDamage.Position );
+			_ = Particles.Create( "particles/impact.flesh-big.vpcf", lastDamage.Position );
 			PlaySound( "kersplat" );
 		}
 
@@ -86,6 +92,9 @@ partial class SandboxPlayer : Player
 
 		Inventory.DropActive();
 		Inventory.DeleteContents();
+
+		// Raven-side
+		Event.Run( "OnPlayerKilled" );
 	}
 
 	public override void TakeDamage( DamageInfo info )
@@ -97,14 +106,10 @@ partial class SandboxPlayer : Player
 
 		lastDamage = info;
 
-		TookDamage( lastDamage.Flags, lastDamage.Position, lastDamage.Force );
-
 		base.TakeDamage( info );
-	}
 
-	[ClientRpc]
-	public void TookDamage( DamageFlags damageFlags, Vector3 forcePos, Vector3 force )
-	{
+		// Raven-side
+		Event.Run( "OnPlayerTakeDamage", info );
 	}
 
 	public override PawnController GetActiveController()
@@ -226,15 +231,4 @@ partial class SandboxPlayer : Player
 			break;
 		}
 	}
-
-	// TODO
-
-	//public override bool HasPermission( string mode )
-	//{
-	//	if ( mode == "noclip" ) return true;
-	//	if ( mode == "devcam" ) return true;
-	//	if ( mode == "suicide" ) return true;
-	//
-	//	return base.HasPermission( mode );
-	//	}
 }
