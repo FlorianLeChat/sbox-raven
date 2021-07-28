@@ -2,11 +2,11 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-public class Health : Panel
+public class Armor : Panel
 {
 	public Label Label;
 
-	public Health()
+	public Armor()
 	{
 		Label = Add.Label( "100", "value" );
 	}
@@ -16,6 +16,7 @@ public class Health : Panel
 		var player = Local.Pawn;
 		if ( player == null ) return;
 
-		Label.Text = $"{player.Health.CeilToInt()} %";
+		// NYI
+		Label.Text = "0%";
 	}
 }
