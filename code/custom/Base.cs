@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 
 partial class SandboxGame : Game
 {
@@ -6,9 +6,10 @@ partial class SandboxGame : Game
 	///
 	/// </summary>
 	[Event.Hotload]
-	public static void OnHotload()
+	public void OnHotload()
 	{
-		Raven.Logs.Add( "Le serveur semble avoir procéder à un rechargement des fichiers." );
+		if ( IsServer )
+			Raven.Logs.Add( "Le serveur semble avoir procéder à un rechargement des fichiers." );
 	}
 
 	/// <summary>
@@ -17,36 +18,25 @@ partial class SandboxGame : Game
 	[Event( "OnClientJoined" )]
 	public static void OnClientJoined( Client client )
 	{
-/*		Positions = FileSystem.Data.ReadJsonOrDefault<Dictionary<ulong, int>>( "data/rts/ratings.json" ) ?? new();
-
-		Log.Info( Positions );*/
+		Raven.Logs.Add( $"Apparition du joueur : {client.Name} ({client.SteamId})." );
 	}
 
 	/// <summary>
 	///
 	/// </summary>
 	[Event( "OnPropSpawned" )]
-	public static void OnPropSpawned( string modelName )
+	public static void OnPropSpawned( Client client, string modelName )
 	{
-
+		Raven.Logs.Add( $"Apparition d'un prop : {modelName} par {client.Name} ({client.SteamId})." );
 	}
 
 	/// <summary>
 	///
 	/// </summary>
 	[Event( "OnEntitySpawned" )]
-	public static void OnEntitySpawned( string entName )
+	public static void OnEntitySpawned(Client client, string className )
 	{
-
-	}
-
-	/// <summary>
-	///
-	/// </summary>
-	[Event( "OnPlayerSpawned" )]
-	public static void OnPlayerSpawned()
-	{
-
+		Raven.Logs.Add( $"Apparition d'une entité : {className} par {client.Name} ({client.SteamId})." );
 	}
 
 	/// <summary>
@@ -55,15 +45,15 @@ partial class SandboxGame : Game
 	[Event( "OnPlayerNoClip" )]
 	public static void OnPlayerNoClip( Client client )
 	{
-		// player.SendCommandToClient( "say \"Changement d'état du noclip\"" );
+		Raven.Logs.Add( $"Changement d'état du noclip de {client.Name} ({client.SteamId})." );
 	}
 
 	/// <summary>
 	///
 	/// </summary>
-	[Event( "OnPlayerTakeDamage" )]
-	public static void OnPlayerTakeDamage( DamageInfo info )
+	[Event( "OnPlayerKilled" )]
+	public static void OnPlayerKilled( Entity pawn )
 	{
-
+		Raven.Logs.Add( $"Mort de {pawn} par {pawn.LastAttacker}." );
 	}
 }

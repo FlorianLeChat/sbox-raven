@@ -1,4 +1,6 @@
-﻿using Sandbox;
+using Sandbox;
+using Sandbox.UI;
+using System.Text.RegularExpressions;
 
 namespace Raven
 {
@@ -20,7 +22,11 @@ namespace Raven
 		[ClientRpc]
 		public static void SendChatMessage( string message )
 		{
-			_ = ConsoleSystem.Run( "chat_addinfo", message );
+			// https://stackoverflow.com/questions/8298614/php-regular-expression-failing
+			var matches = Regex.Matches( message, "[0-9]+");
+			var steamID = matches.Count > 0 ? $"avatar:{matches[0]}" : null;
+
+			ChatBox.AddInformation( message, steamID );
 		}
 
 		/// <summary>
