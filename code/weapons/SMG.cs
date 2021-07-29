@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 
 [Library( "weapon_smg", Title = "Fusil Mitrailleur", Spawnable = true )]
 partial class SMG : Weapon
@@ -50,7 +50,7 @@ partial class SMG : Weapon
 
 		if ( Owner == Local.Pawn )
 		{
-			new Sandbox.ScreenShake.Perlin( 0.5f, 4.0f, 1.0f, 0.5f );
+			_ = new Sandbox.ScreenShake.Perlin(0.5f, 4.0f, 1.0f, 0.5f);
 		}
 
 		ViewModelEntity?.SetAnimBool( "fire", true );

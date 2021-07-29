@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 
 [Library( "weapon_shotgun", Title = "Fusil à pompe", Spawnable = true )]
 partial class Shotgun : Weapon
@@ -65,7 +65,7 @@ partial class Shotgun : Weapon
 
 		if ( IsLocalPawn )
 		{
-			new Sandbox.ScreenShake.Perlin( 1.0f, 1.5f, 2.0f );
+			_ = new Sandbox.ScreenShake.Perlin(1.0f, 1.5f, 2.0f);
 		}
 
 		CrosshairPanel?.CreateEvent( "fire" );
