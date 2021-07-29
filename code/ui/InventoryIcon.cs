@@ -1,4 +1,3 @@
-﻿
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
@@ -13,7 +12,7 @@ public class InventoryIcon : Panel
 	public InventoryIcon( int i, Panel parent )
 	{
 		Parent = parent;
-		Label = Add.Label( "empty", "item-name" );
+		Label = Add.Label( "vide", "item-name" );
 		Number = Add.Label( $"{i}", "slot-number" );
 		Magazine = Add.Label( "0 / 0", "magazine-number" );
 	}

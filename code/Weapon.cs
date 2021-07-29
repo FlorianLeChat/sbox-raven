@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 
 public partial class Weapon : BaseWeapon, IUse
 {
