@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 using System.Collections.Generic;
 
 partial class SandboxPlayer : Player
@@ -60,9 +60,6 @@ partial class SandboxPlayer : Player
 		Inventory.Add( new Flashlight() );
 
 		base.Respawn();
-
-		// Raven-side
-		Event.Run( "OnPlayerSpawned" );
 	}
 
 	public override void OnKilled()
@@ -73,6 +70,7 @@ partial class SandboxPlayer : Player
 		{
 			_ = Particles.Create( "particles/impact.flesh.bloodpuff-big.vpcf", lastDamage.Position );
 			_ = Particles.Create( "particles/impact.flesh-big.vpcf", lastDamage.Position );
+
 			PlaySound( "kersplat" );
 		}
 
@@ -92,9 +90,6 @@ partial class SandboxPlayer : Player
 
 		Inventory.DropActive();
 		Inventory.DeleteContents();
-
-		// Raven-side
-		Event.Run( "OnPlayerKilled" );
 	}
 
 	public override void TakeDamage( DamageInfo info )
@@ -107,9 +102,6 @@ partial class SandboxPlayer : Player
 		lastDamage = info;
 
 		base.TakeDamage( info );
-
-		// Raven-side
-		Event.Run( "OnPlayerTakeDamage", info );
 	}
 
 	public override PawnController GetActiveController()
@@ -134,9 +126,9 @@ partial class SandboxPlayer : Player
 		return MainCamera;
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( Client client )
 	{
-		base.Simulate( cl );
+		base.Simulate( client );
 
 		if ( Input.ActiveChild != null )
 		{
@@ -156,7 +148,7 @@ partial class SandboxPlayer : Player
 			EnableSolidCollisions = !controller.HasTag( "noclip" );
 
 		TickPlayerUse();
-		SimulateActiveChild( cl, ActiveChild );
+		SimulateActiveChild( client, ActiveChild );
 
 		if ( Input.Pressed( InputButton.View ) )
 		{
@@ -175,6 +167,7 @@ partial class SandboxPlayer : Player
 		if ( Input.Pressed( InputButton.Drop ) )
 		{
 			var dropped = Inventory.DropActive();
+
 			if ( dropped != null )
 			{
 				dropped.PhysicsGroup.ApplyImpulse( Velocity + EyeRot.Forward * 500.0f + Vector3.Up * 100.0f, true );
@@ -188,7 +181,7 @@ partial class SandboxPlayer : Player
 		{
 			if ( timeSinceJumpReleased < 0.3f )
 			{
-				Game.Current?.DoPlayerNoclip( cl );
+				Game.Current?.DoPlayerNoclip( client );
 			}
 
 			timeSinceJumpReleased = 0;
@@ -211,9 +204,12 @@ partial class SandboxPlayer : Player
 	public static void SetInventoryCurrent( string entName )
 	{
 		var target = ConsoleSystem.Caller.Pawn;
-		if ( target == null ) return;
+
+		if ( target == null )
+			return;
 
 		var inventory = target.Inventory;
+
 		if ( inventory == null )
 			return;
 
