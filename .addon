@@ -1,5 +1,27 @@
 {
+	"name": "Raven",
+	"version": "1.0.0",
 	"sharedassets": "*.*",
-	"type": "game",
-	"ident": "raven.common"
+	"ident": "raven.common",
+
+	"depends":
+	[
+		"base",
+		"citizen",
+		"rust"
+	],
+
+	"gamemodes":
+	[
+		{
+			"name": "common",
+			"title": "Source Base",
+			"description": "A collection of fundamental scripts for complex systems."
+		},
+		{
+			"name": "hl2",
+			"title": "Half-Life 2",
+			"description": "Development environment for a Half-Life 2 Roleplay server."
+		}
+	]
 }
