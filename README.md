@@ -1,15 +1,9 @@
-# sbox-minimal
+# Raven Scripts
 
-![Screenshot](https://files.facepunch.com/garry/8fc638dc-2c62-4ed6-b20a-69c2c5342a9c.jpg)
+This is a test directory for [S&Box](https://sbox.facepunch.com/news), a new sandbox game from [Facepunch Studios](https://facepunch.com/) (like Garry's Mod but still in heavy development). The directory is based on the [Sandbox](https://github.com/Facepunch/sandbox) gamemode of the game with some modifications and improvements to create a kind of roleplay gamemode but without any real intention.
 
- Minimal gamemode for s&box.
- 
- # Installing
- 
- Download as a zip and put the minimum folder in your addons/ folder. It should show up in the menu allowing you to make a new game.
- 
- # Editing
- 
- Run GenerateProjects in addons to make the csproj. Open Addons.sln.
- 
- Editing the .cs, .html, .scss files should reflect their changes in game in realtime.
+For the moment, it's just a matter of getting to know the game and its mechanics (like C#). In the future, this directory will probably be abandoned to concentrate in private server projects.
+
+**Forgive me again to the foreigners but the comments and some messages in the code are in my native language (French) and I do not intend to modify them for the moment for the sake of simplicity.**
+
+![image](https://user-images.githubusercontent.com/26360935/127704331-66d1462f-dfa3-4622-8a8b-6987586acf27.png)
