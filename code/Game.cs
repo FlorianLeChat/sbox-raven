@@ -1,8 +1,21 @@
 using Sandbox;
+using System.Collections.Generic;
 
 [Library( "sandbox", Title = "Raven" )]
 partial class SandboxGame : Game
 {
+	private static readonly List<string> commands = new()
+	{
+		// Affiche certaines informations sur la position du joueur.
+		"cl_showpos 1",
+		// Affiche certaines statistiques sur le nombre d'images par seconde.
+		"cl_showfps 4",
+		// Affiche les erreurs de prédictions en provenance du moteur.
+		"cl_showerror 1",
+		// Active certaines fonctionnalités de développement.
+		"developer 1"
+	};
+
 	public SandboxGame()
 	{
 		if ( IsServer )
@@ -20,6 +33,12 @@ partial class SandboxGame : Game
 		player.Respawn();
 
 		client.Pawn = player;
+
+		// Permet d'activer les commandes personnalisées.
+		foreach ( var command in commands )
+		{
+			client.SendCommandToClient( command );
+		}
 
 		// Raven-side
 		Event.Run( "OnClientJoined", client );
