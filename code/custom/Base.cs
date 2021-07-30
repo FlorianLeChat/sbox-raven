@@ -3,7 +3,7 @@ using Sandbox;
 partial class SandboxGame : Game
 {
 	/// <summary>
-	///
+	/// Se déclenche lors d'un rafraîchissement des fichiers.
 	/// </summary>
 	[Event.Hotload]
 	public void OnHotload()
@@ -13,7 +13,7 @@ partial class SandboxGame : Game
 	}
 
 	/// <summary>
-	///
+	/// Se déclenche lorsqu'un joueur se connecte au serveur.
 	/// </summary>
 	[Event( "OnClientJoined" )]
 	public static void OnClientJoined( Client client )
@@ -22,7 +22,7 @@ partial class SandboxGame : Game
 	}
 
 	/// <summary>
-	///
+	/// Se déclenche lorsqu'un joueur fait apparaître un prop.
 	/// </summary>
 	[Event( "OnPropSpawned" )]
 	public static void OnPropSpawned( Client client, string modelName )
@@ -31,16 +31,16 @@ partial class SandboxGame : Game
 	}
 
 	/// <summary>
-	///
+	/// Se déclenche lorsqu'un joueur fait apparaître une entité.
 	/// </summary>
 	[Event( "OnEntitySpawned" )]
-	public static void OnEntitySpawned(Client client, string className )
+	public static void OnEntitySpawned( Client client, string className )
 	{
 		Raven.Logs.Add( $"Apparition d'une entité : {className} par {client.Name} ({client.SteamId})." );
 	}
 
 	/// <summary>
-	///
+	/// Se déclenche lorsqu'un joueur passe en noclip.
 	/// </summary>
 	[Event( "OnPlayerNoClip" )]
 	public static void OnPlayerNoClip( Client client )
@@ -49,11 +49,11 @@ partial class SandboxGame : Game
 	}
 
 	/// <summary>
-	///
+	/// Se déclenche lorsqu'un joueur est tué.
 	/// </summary>
 	[Event( "OnPlayerKilled" )]
 	public static void OnPlayerKilled( Entity pawn )
 	{
-		Raven.Logs.Add( $"Mort de {pawn} par {pawn.LastAttacker}." );
+		// Raven.Logs.Add( $"Mort de {pawn} par {pawn.LastAttacker}." );
 	}
 }
