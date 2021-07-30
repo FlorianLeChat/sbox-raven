@@ -9,11 +9,11 @@ public class InventoryIcon : Panel
 	public Label Number;
 	public Label Magazine;
 
-	public InventoryIcon( int i, Panel parent )
+	public InventoryIcon( int index, Panel parent )
 	{
 		Parent = parent;
 		Label = Add.Label( "vide", "item-name" );
-		Number = Add.Label( $"{i}", "slot-number" );
+		Number = Add.Label( $"{index}", "slot-number" );
 		Magazine = Add.Label( "0 / 0", "magazine-number" );
 	}
 
