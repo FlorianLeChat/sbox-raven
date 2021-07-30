@@ -1,43 +1,83 @@
 Health
 {
 	position: absolute;
-	background-color: rgba(25, 25, 25, 0.5);
+	backdrop-filter: blur( 5px );
+	transition: all 0.5s ease-out;
+	background-color: rgba( 25, 25, 25, 0.5 );
 	right: 50px;
-	bottom: 100px;
+	bottom: 160px;
 	font-family: Roboto;
-	font-size: 40px;
+	font-size: 30px;
 	color: red;
-	padding: 0 20px;
+	height: 50px;
+	padding: 0 10px;
 	align-items: center;
+	opacity: 0;
+
+	&.open {
+		opacity: 1;
+	}
 }
 
 Armor
 {
 	position: absolute;
-	background-color: rgba(25, 25, 25, 0.5);
+	backdrop-filter: blur( 5px );
+	transition: all 0.5s ease-out;
+	background-color: rgba( 25, 25, 25, 0.5 );
+	right: 50px;
+	bottom: 105px;
+	font-family: Roboto;
+	font-size: 30px;
+	color: dodgerblue;
+	height: 50px;
+	padding: 0 10px;
+	align-items: center;
+	opacity: 0;
+
+	&.open
+	{
+		opacity: 1;
+	}
+}
+
+Hunger
+{
+	position: absolute;
+	backdrop-filter: blur( 5px );
+	transition: all 0.5s ease-out;
+	background-color: rgba( 25, 25, 25, 0.5 );
 	right: 50px;
 	bottom: 50px;
 	font-family: Roboto;
-	font-size: 40px;
-	color: blue;
-	padding: 0 20px;
+	font-size: 30px;
+	color: green;
+	height: 50px;
+	padding: 0 10px;
 	align-items: center;
+	opacity: 0;
+
+	&.open
+	{
+		opacity: 1;
+	}
 }
 
 CurrentTool
 {
 	position: absolute;
-	background: linear-gradient(to right, rgba(black, 0.5), rgba(black, 0.0));
+	backdrop-filter: blur( 5px );
+	background: linear-gradient( to right, rgba( black, 0.5 ), rgba( black, 0 ) );
 	top: 100px;
 	left: 0px;
 	padding: 30px 70px;
 	flex-direction: column;
 	width: 560px;
-	opacity: 0.0;
+	opacity: 0;
 
 	&.active
 	{
-		opacity: 1.0;
+		opacity: 1;
 	}
 
 	.title
@@ -62,13 +102,14 @@ CurrentTool
 
 rootpanel
 {
-	background-color: rgba( #333, 0 );
+	background-color: rgba( 25, 25, 25, 0 );
 	transition: background-color 0.2s ease-in;
 
 	&.spawnmenuopen
 	{
 		transition: background-color 0.3s ease-out;
-		background-color: rgba( #333, 0.9 );
+		backdrop-filter: blur( 5px );
+		background-color: rgba( 25, 25, 25, 0.5 );
 	}
 
 	&.devcamera
@@ -80,24 +121,32 @@ rootpanel
 InventoryBar
 {
 	position: absolute;
+	transition: all 0.5s ease-out;
 	width: 100%;
 	bottom: 48px;
 	justify-content: center;
 	align-items: flex-end;
+	opacity: 0;
+
+	&.open
+	{
+		opacity: 1;
+	}
 }
 
 InventoryIcon
 {
 	width: 80px;
 	height: 80px;
-	background-color: rgba(25, 25, 25, 0.5);
+	background-color: rgba( 25, 25, 25, 0.5 );
 	margin: 0px 2px;
 	position: relative;
 	transition: all 0.2s ease-in-out;
 	margin-top: 10px;
 	font-family: Roboto;
 
-	.item-name {
+	.item-name
+	{
 		padding: 5px;
 		color: deepskyblue;
 		text-align: center;
@@ -111,7 +160,8 @@ InventoryIcon
 		text-shadow: 1px 1px 5px black;
 	}
 
-	.slot-number {
+	.slot-number
+	{
 		font-size: 25px;
 		color: white;
 		font-weight: 900;
@@ -121,7 +171,8 @@ InventoryIcon
 		left: 5px;
 	}
 
-	.magazine-number {
+	.magazine-number
+	{
 		font-size: 15px;
 		color: white;
 		font-weight: 500;
@@ -131,24 +182,28 @@ InventoryIcon
 		right: 5px;
 	}
 
-	&.active {
+	&.active
+	{
 		background-color: rgba( orange, 0.5 );
 		transition: all 0.1s ease-out;
 		width: 100px;
 		height: 100px;
 
-		.item-name {
+		.item-name
+		{
 			color: yellow;
 			transition: all 0.1s ease-out;
 			font-size: 15px;
 		}
 
-		.slot-number {
+		.slot-number
+		{
 			color: yellow;
 			opacity: 0.6;
 		}
 
-		.magazine-number {
+		.magazine-number
+		{
 			opacity: 0.5;
 		}
 	}
