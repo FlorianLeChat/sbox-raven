@@ -1,8 +1,7 @@
+using Raven;
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-
-using static Raven.ConVars;
 
 public class Health : Panel
 {
@@ -22,6 +21,6 @@ public class Health : Panel
 
 		Label.Text = $"{player.Health.CeilToInt()} %";
 
-		SetClass( "open", GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
+		SetClass( "open", ConVars.GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
 	}
 }

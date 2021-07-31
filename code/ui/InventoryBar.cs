@@ -1,8 +1,7 @@
+using Raven;
 using Sandbox;
 using Sandbox.UI;
 using System.Collections.Generic;
-
-using static Raven.ConVars;
 
 public class InventoryBar : Panel
 {
@@ -35,7 +34,7 @@ public class InventoryBar : Panel
 			UpdateIcon( player.Inventory.GetSlot( i ), slots[i] );
 		}
 
-		SetClass( "open", GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
+		SetClass( "open", ConVars.GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
 	}
 
 	private static void UpdateIcon( Entity entity, InventoryIcon inventoryIcon )

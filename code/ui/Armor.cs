@@ -1,8 +1,7 @@
+using Raven;
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-
-using static Raven.ConVars;
 
 public class Armor : Panel
 {
@@ -23,6 +22,6 @@ public class Armor : Panel
 		// NYI
 		Label.Text = "0%";
 
-		SetClass( "open", GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
+		SetClass( "open", ConVars.GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
 	}
 }

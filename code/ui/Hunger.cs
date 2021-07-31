@@ -1,8 +1,8 @@
+using Raven;
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-using static Raven.ConVars;
 public class Hunger : Panel
 {
 	public Label Label;
@@ -22,6 +22,6 @@ public class Hunger : Panel
 		// NYI
 		Label.Text = "100%";
 
-		SetClass( "open", GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
+		SetClass( "open", ConVars.GetValue( "permanent_hud" ) == "true" || Input.Down( InputButton.Walk ) );
 	}
 }
