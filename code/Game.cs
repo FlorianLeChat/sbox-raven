@@ -22,6 +22,9 @@ partial class SandboxGame : Game
 		{
 			// Create the HUD
 			_ = new SandboxHud();
+
+			// Raven-side
+			Event.Run( "OnServerStartup" );
 		}
 	}
 
