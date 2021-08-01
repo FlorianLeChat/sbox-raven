@@ -6,7 +6,7 @@ namespace Raven
 	public partial class Characters : Game
 	{
 		public const int SaveInterval = 300 * 1000;
-		public const string SaveDirectory = "raven/common/characters/";
+		public const string SaveDirectory = "characters";
 		public static Dictionary<ulong, Dictionary<string, string>> ServerCache { get; set; } = new();
 
 		/// <summary>
