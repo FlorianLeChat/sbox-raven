@@ -114,9 +114,12 @@ partial class SandboxGame : Game
 			.Size( 2 )
 			.Run();
 
-		var ent = new Prop();
-		ent.Position = tr.EndPos;
-		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
+		var ent = new Prop
+		{
+			Position = tr.EndPos,
+			Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 )
+		};
+
 		ent.SetModel( modelName );
 
 		if ( ent.PhysicsBody != null && ent.PhysicsGroup.BodyCount == 1 )
