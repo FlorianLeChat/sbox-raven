@@ -60,7 +60,8 @@ partial class SandboxGame : Game
 		base.OnKilled( pawn );
 
 		// Raven-side
-		Event.Run( "OnPlayerKilled", pawn );
+		if ( pawn is Player player )
+			Event.Run( "OnPlayerKilled", player.GetClientOwner(), pawn );
 	}
 
 	public override void DoPlayerNoclip( Client client )

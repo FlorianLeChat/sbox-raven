@@ -53,8 +53,13 @@ internal class LogEvents : Game
 	/// Se déclenche lorsqu'un joueur est tué.
 	/// </summary>
 	[Event( "OnPlayerKilled" )]
-	public static void OnPlayerKilled( Entity pawn )
+	public static void OnPlayerKilled( Client client, Entity pawn )
 	{
-		// Raven.Logs.Add( $"Mort de {pawn} par {pawn.LastAttacker}." );
+		if ( pawn.LastAttacker is Player attacker )
+		{
+			var target = attacker.GetClientOwner();
+
+			Logs.Add( $"Mort de { client.Name } ({ client.SteamId }) par { target.Name }." );
+		}
 	}
 }
