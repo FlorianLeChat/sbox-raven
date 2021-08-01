@@ -23,6 +23,15 @@ internal class LogEvents : Game
 	}
 
 	/// <summary>
+	/// Se déclenche lorsqu'un joueur se déconnecte du serveur.
+	/// </summary>
+	[Event( "OnClientDisconnect" )]
+	public static void OnClientDisconnect( Client client, NetworkDisconnectionReason reason )
+	{
+		Logs.Add( $"Déconnexion du joueur : { client.Name } ({ client.SteamId }) [raison = { reason })." );
+	}
+
+	/// <summary>
 	/// Se déclenche lorsqu'un joueur fait apparaître un prop.
 	/// </summary>
 	[Event( "OnPropSpawned" )]
