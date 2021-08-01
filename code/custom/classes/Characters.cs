@@ -1,14 +1,12 @@
 using Sandbox;
-using System.Linq;
-// using System.Timers;
 using System.Collections.Generic;
 
 namespace Raven
 {
 	public partial class Characters : Game
 	{
-		public const int SaveDataInterval = 300 * 1000;
-		// public static Timer SaveDataTimer { get; set; } = new();
+		public const int SaveInterval = 300 * 1000;
+		public const string SaveDirectory = "raven/common/characters/";
 		public static Dictionary<ulong, Dictionary<string, string>> ServerCache { get; set; } = new();
 
 		/// <summary>
@@ -17,24 +15,11 @@ namespace Raven
 		[Event( "OnServerStartup" )]
 		public static async void OnServerStartup()
 		{
-			// https://github.com/Facepunch/sbox-issues/issues/541
-			/*SaveDataTimer.Elapsed += (source, e) =>
-			{
-				var players = Client.All;
-
-				foreach ( var player in players )
-				{
-					SaveData( player.SteamId );
-				}
-
-				Logs.Add( $"Sauvegarde de {players.Count} joueur(s) effectuée." );
-			};
-			SaveDataTimer.Interval = SaveDataInterval;
-			SaveDataTimer.Enabled = true;*/
+			FileSystem.Data.CreateDirectory( "characters" );
 
 			while ( true )
 			{
-				await GameTask.Delay( SaveDataInterval );
+				await GameTask.Delay( SaveInterval );
 
 				var players = Client.All;
 
@@ -101,14 +86,14 @@ namespace Raven
 		/// </summary>
 		private static void LoadData( ulong steamID )
 		{
-			ServerCache[ steamID ] = FileSystem.Data.ReadJsonOrDefault( $"raven/characters/{ steamID }.json", new Dictionary<string, string> {} );
+			ServerCache[ steamID ] = FileSystem.Data.ReadJsonOrDefault( $"{ SaveDirectory }/{ steamID }.json", new Dictionary<string, string> {} );
 		}
 
 		private static void SaveData( ulong steamID )
 		{
 			if ( ServerCache.TryGetValue( steamID, out var cache ) )
 			{
-				FileSystem.Data.WriteJson( $"raven/characters/{ steamID }.json", cache );
+				FileSystem.Data.WriteJson( $"{ SaveDirectory }/{ steamID }.json", cache );
 			}
 		}
 	}
