@@ -2,11 +2,11 @@ using Sandbox;
 
 public class ViewModel : BaseViewModel
 {
-	protected float SwingInfluence => 0.05f;
-	protected float ReturnSpeed => 5.0f;
-	protected float MaxOffsetLength => 10.0f;
-	protected float BobCycleTime => 7;
-	protected Vector3 BobDirection => new Vector3( 0.0f, 1.0f, 0.5f );
+	protected static float SwingInfluence => 0.05f;
+	protected static float ReturnSpeed => 5.0f;
+	protected static float MaxOffsetLength => 10.0f;
+	protected static float BobCycleTime => 7;
+	protected static Vector3 BobDirection => new( 0.0f, 1.0f, 0.5f );
 
 	private Vector3 swingOffset;
 	private float lastPitch;
@@ -37,10 +37,10 @@ public class ViewModel : BaseViewModel
 
 		var playerVelocity = Local.Pawn.Velocity;
 
-		if (Local.Pawn is Player player)
+		if ( Local.Pawn is Player player )
 		{
 			var controller = player.GetActiveController();
-			if (controller != null && controller.HasTag("noclip"))
+			if ( controller != null && controller.HasTag( "noclip" ) )
 			{
 				playerVelocity = Vector3.Zero;
 			}
@@ -54,7 +54,7 @@ public class ViewModel : BaseViewModel
 
 		var verticalDelta = playerVelocity.z * Time.Delta;
 		var viewDown = Rotation.FromPitch( newPitch ).Up * -1.0f;
-		verticalDelta *= (1.0f - System.MathF.Abs( viewDown.Cross( Vector3.Down ).y ));
+		verticalDelta *= 1.0f - System.MathF.Abs( viewDown.Cross( Vector3.Down ).y );
 		pitchDelta -= verticalDelta * 1;
 
 		var offset = CalcSwingOffset( pitchDelta, yawDelta );
@@ -68,7 +68,7 @@ public class ViewModel : BaseViewModel
 
 	protected Vector3 CalcSwingOffset( float pitchDelta, float yawDelta )
 	{
-		Vector3 swingVelocity = new Vector3( 0, yawDelta, pitchDelta );
+		var swingVelocity = new Vector3( 0, yawDelta, pitchDelta );
 
 		swingOffset -= swingOffset * ReturnSpeed * Time.Delta;
 		swingOffset += (swingVelocity * SwingInfluence);
@@ -88,9 +88,7 @@ public class ViewModel : BaseViewModel
 		var twoPI = System.MathF.PI * 2.0f;
 
 		if ( bobAnim > twoPI )
-		{
 			bobAnim -= twoPI;
-		}
 
 		var speed = new Vector2( velocity.x, velocity.y ).Length;
 		speed = speed > 10.0 ? speed : 0.0f;

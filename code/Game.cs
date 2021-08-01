@@ -47,7 +47,7 @@ partial class SandboxGame : Game
 		// Event.Run( "OnClientJoined", client );
 		Raven.Characters.OnClientJoined( client );
 		LogEvents.OnClientJoined( client );
-		SavePositions.OnClientJoined(client);
+		SavePositions.OnClientJoined( client );
 	}
 
 	public override void ClientDisconnect( Client client, NetworkDisconnectionReason reason )
@@ -56,9 +56,9 @@ partial class SandboxGame : Game
 
 		// Raven-side (TEMP FIX)
 		// Event.Run( "OnClientDisconnect", client, reason );
-		Raven.Characters.OnClientDisconnect(client, reason);
-		LogEvents.OnClientDisconnect(client, reason);
-		SavePositions.OnClientDisconnect(client, reason);
+		Raven.Characters.OnClientDisconnect( client, reason );
+		LogEvents.OnClientDisconnect( client, reason );
+		SavePositions.OnClientDisconnect( client, reason );
 	}
 
 	public override void OnKilled( Entity pawn )
