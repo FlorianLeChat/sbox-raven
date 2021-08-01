@@ -1,7 +1,8 @@
 using Raven;
 using Sandbox;
 
-internal class LogEvents : Game
+// TEMP FIX : `public` => `internal`
+public class LogEvents : Game
 {
 	/// <summary>
 	/// Se déclenche lors d'un rafraîchissement des fichiers.

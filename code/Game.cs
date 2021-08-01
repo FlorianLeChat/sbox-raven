@@ -43,25 +43,32 @@ partial class SandboxGame : Game
 			client.SendCommandToClient( command );
 		}
 
-		// Raven-side
-		Event.Run( "OnClientJoined", client );
+		// Raven-side (TEMP FIX).
+		// Event.Run( "OnClientJoined", client );
+		Raven.Characters.OnClientJoined( client );
+		LogEvents.OnClientJoined( client );
+		SavePositions.OnClientJoined(client);
 	}
 
 	public override void ClientDisconnect( Client client, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( client, reason );
 
-		// Raven-side
-		Event.Run( "OnClientDisconnect", client, reason );
+		// Raven-side (TEMP FIX)
+		// Event.Run( "OnClientDisconnect", client, reason );
+		Raven.Characters.OnClientDisconnect(client, reason);
+		LogEvents.OnClientDisconnect(client, reason);
+		SavePositions.OnClientDisconnect(client, reason);
 	}
 
 	public override void OnKilled( Entity pawn )
 	{
 		base.OnKilled( pawn );
 
-		// Raven-side
+		// Raven-side (TEMP FIX)
 		if ( pawn is Player player )
-			Event.Run( "OnPlayerKilled", player.GetClientOwner(), pawn );
+			// Event.Run( "OnPlayerKilled", player.GetClientOwner(), pawn );
+			LogEvents.OnPlayerKilled( player.GetClientOwner(), pawn );
 	}
 
 	public override void DoPlayerNoclip( Client client )
@@ -78,8 +85,9 @@ partial class SandboxGame : Game
 			}
 		}
 
-		// Raven-side
-		Event.Run( "OnPlayerNoClip", client );
+		// Raven-side (TEMP FIX)
+		// Event.Run( "OnPlayerNoClip", client );
+		LogEvents.OnPlayerNoClip( client );
 	}
 
 	public override void DoPlayerSuicide( Client client )
@@ -130,8 +138,9 @@ partial class SandboxGame : Game
 			ent.PhysicsBody.Position -= delta;
 		}
 
-		// Raven-side
-		Event.Run( "OnPropSpawned", caller, modelName);
+		// Raven-side (TEMP FIX)
+		// Event.Run( "OnPropSpawned", caller, modelName );
+		LogEvents.OnPropSpawned( caller, modelName );
 	}
 
 	[ServerCmd( "spawn_entity" )]
@@ -168,7 +177,8 @@ partial class SandboxGame : Game
 		ent.Position = tr.EndPos;
 		ent.Rotation = Rotation.From( new Angles( 0, owner.EyeRot.Angles().yaw, 0 ) );
 
-		// Raven-side
-		Event.Run( "OnEntitySpawned", caller, entName );
+		// Raven-side (TEMP FIX)
+		// Event.Run( "OnEntitySpawned", caller, entName );
+		LogEvents.OnEntitySpawned( caller, entName );
 	}
 }
