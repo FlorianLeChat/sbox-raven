@@ -52,7 +52,7 @@ partial class SandboxGame : Game
 		base.ClientDisconnect( client, reason );
 
 		// Raven-side
-		Event.Run( "OnClientDisconnect", client, reason);
+		Event.Run( "OnClientDisconnect", client, reason );
 	}
 
 	public override void OnKilled( Entity pawn )
@@ -85,6 +85,7 @@ partial class SandboxGame : Game
 	{
 		// Can't suicide.
 	}
+
 	public override void PostLevelLoaded()
 	{
 		base.PostLevelLoaded();

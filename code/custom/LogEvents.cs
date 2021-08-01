@@ -1,6 +1,7 @@
+using Raven;
 using Sandbox;
 
-partial class SandboxGame : Game
+internal class LogEvents : Game
 {
 	/// <summary>
 	/// Se déclenche lors d'un rafraîchissement des fichiers.
@@ -9,7 +10,7 @@ partial class SandboxGame : Game
 	public void OnHotload()
 	{
 		if ( IsServer )
-			Raven.Logs.Add( "Le serveur semble avoir procéder à un rechargement des fichiers." );
+			Logs.Add( "Le serveur semble avoir procéder à un rechargement des fichiers." );
 	}
 
 	/// <summary>
@@ -18,7 +19,7 @@ partial class SandboxGame : Game
 	[Event( "OnClientJoined" )]
 	public static void OnClientJoined( Client client )
 	{
-		Raven.Logs.Add( $"Apparition du joueur : {client.Name} ({client.SteamId})." );
+		Logs.Add( $"Apparition du joueur : { client.Name } ({ client.SteamId })." );
 	}
 
 	/// <summary>
@@ -27,7 +28,7 @@ partial class SandboxGame : Game
 	[Event( "OnPropSpawned" )]
 	public static void OnPropSpawned( Client client, string modelName )
 	{
-		Raven.Logs.Add( $"Apparition d'un prop : {modelName} par {client.Name} ({client.SteamId})." );
+		Logs.Add( $"Apparition d'un prop : { modelName } par { client.Name } ({ client.SteamId })." );
 	}
 
 	/// <summary>
@@ -36,7 +37,7 @@ partial class SandboxGame : Game
 	[Event( "OnEntitySpawned" )]
 	public static void OnEntitySpawned( Client client, string className )
 	{
-		Raven.Logs.Add( $"Apparition d'une entité : {className} par {client.Name} ({client.SteamId})." );
+		Logs.Add( $"Apparition d'une entité : { className } par { client.Name } ({ client.SteamId })." );
 	}
 
 	/// <summary>
@@ -45,7 +46,7 @@ partial class SandboxGame : Game
 	[Event( "OnPlayerNoClip" )]
 	public static void OnPlayerNoClip( Client client )
 	{
-		Raven.Logs.Add( $"Changement d'état du noclip de {client.Name} ({client.SteamId})." );
+		Logs.Add( $"Changement d'état du noclip de { client.Name } ({ client.SteamId })." );
 	}
 
 	/// <summary>
