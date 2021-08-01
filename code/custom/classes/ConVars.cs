@@ -20,7 +20,7 @@ namespace Raven
 		/// </summary>
 		public static string GetValue( string name, Type type = Type.String )
 		{
-			var value = ConsoleSystem.GetValue( "rcv_" + name, "" );
+			var value = ConsoleSystem.GetValue( "rcvar_" + name, "" );
 
 			switch (type)
 			{
@@ -42,7 +42,7 @@ namespace Raven
 		/// <summary>
 		/// Certains éléments de l'interface doivent être tout le temps affichés ?
 		/// </summary>
-		[ConVar.ClientData( "rcv_permanent_hud" )]
+		[ConVar.ClientData( "rcvar_permanent_hud" )]
 		public static bool Permanent_Hud { get; set; } = false;
 	}
 }
