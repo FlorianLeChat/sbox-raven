@@ -21,14 +21,7 @@ namespace Raven
 			{
 				await GameTask.Delay( SaveInterval );
 
-				var players = Client.All;
-
-				foreach ( var player in players )
-				{
-					SaveData( player.SteamId );
-				}
-
-				Logs.Add( $"Sauvegarde de {players.Count} joueur(s) effectuée." );
+				OnServerShutdown();
 			}
 		}
 
@@ -43,7 +36,7 @@ namespace Raven
 			}
 			else
 			{
-				ServerCache[ client.SteamId ][ key ] = value;
+				ServerCache[ client.SteamId ] = new Dictionary<string, string> { [ key ] = value };
 			}
 		}
 
@@ -79,6 +72,19 @@ namespace Raven
 			SaveData( steamID );
 
 			ServerCache.Remove( steamID );
+		}
+
+		[Event( "OnServerShutdown" )]
+		public static void OnServerShutdown()
+	{
+			var players = Client.All;
+
+			foreach ( var player in players )
+			{
+				SaveData( player.SteamId );
+			}
+
+			Logs.Add( $"Sauvegarde de {players.Count} joueur(s) effectuée." );
 		}
 
 		/// <summary>
