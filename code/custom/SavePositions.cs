@@ -31,7 +31,6 @@ internal class SavePositions : Game
 	[Event( "OnClientDisconnect" )]
 	public static void OnClientDisconnect( Client client, NetworkDisconnectionReason _ )
 	{
-		if (client.Pawn != null)
-			Characters.SetData( client, "LastPosition", client.Pawn.Position.ToString() );
+		Characters.SetData( client, "LastPosition", client.Pawn.Position.ToString() );
 	}
 }

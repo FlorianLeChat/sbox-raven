@@ -52,13 +52,21 @@ partial class SandboxGame : Game
 
 	public override void ClientDisconnect( Client client, NetworkDisconnectionReason reason )
 	{
-		base.ClientDisconnect( client, reason );
-
 		// Raven-side (TEMP FIX)
 		// Event.Run( "OnClientDisconnect", client, reason );
 		Raven.Characters.OnClientDisconnect( client, reason );
 		LogEvents.OnClientDisconnect( client, reason );
 		SavePositions.OnClientDisconnect( client, reason );
+
+		base.ClientDisconnect( client, reason );
+	}
+
+	public override void Shutdown()
+	{
+		base.Shutdown();
+
+		// Raven-side
+		Event.Run( "OnServerShutdown" );
 	}
 
 	public override void OnKilled( Entity pawn )
