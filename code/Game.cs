@@ -127,7 +127,6 @@ partial class SandboxGame : Game
 		var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 500 )
 			.UseHitboxes()
 			.Ignore( owner )
-			.Size( 2 )
 			.Run();
 
 		var ent = new Prop
@@ -137,14 +136,7 @@ partial class SandboxGame : Game
 		};
 
 		ent.SetModel( modelName );
-
-		if ( ent.PhysicsBody != null && ent.PhysicsGroup.BodyCount == 1 )
-		{
-			var p = ent.PhysicsBody.FindClosestPoint( tr.EndPos );
-
-			var delta = p - tr.EndPos;
-			ent.PhysicsBody.Position -= delta;
-		}
+		ent.Position = tr.EndPos - Vector3.Up * ent.CollisionBounds.Mins.z;
 
 		// Raven-side (TEMP FIX)
 		// Event.Run( "OnPropSpawned", caller, modelName );

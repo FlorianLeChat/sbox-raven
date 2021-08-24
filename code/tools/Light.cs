@@ -1,4 +1,4 @@
-﻿namespace Sandbox.Tools
+namespace Sandbox.Tools
 {
 	[Library( "tool_light", Title = "Lights", Description = "A dynamic point light", Group = "construction" )]
 	public partial class LightTool : BaseTool
@@ -68,6 +68,7 @@
 					QuadraticAttenuation = 1.0f,
 					Brightness = 1,
 					Color = Color.Random,
+					LightCookie = Texture.Load( "materials/effects/lightcookie.vtex" )
 				};
 
 				light.UseFogNoShadows();

@@ -1,4 +1,4 @@
-﻿namespace Sandbox.Tools
+namespace Sandbox.Tools
 {
 	[Library( "tool_lamp", Title = "Lamps", Description = "Directional light source that casts shadows", Group = "construction" )]
 	public partial class LampTool : BaseTool
@@ -71,7 +71,8 @@
 					OuterConeAngle = 45,
 					Brightness = 10,
 					Color = Color.Random,
-					Rotation = Rotation.Identity
+					Rotation = Rotation.Identity,
+					LightCookie = Texture.Load( "materials/effects/lightcookie.vtex" )
 				};
 
 				lamp.SetModel( Model );
