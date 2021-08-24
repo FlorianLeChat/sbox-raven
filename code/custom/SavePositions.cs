@@ -10,11 +10,10 @@ internal class SavePositions : Game
 	[Event( "OnClientJoined" )]
 	public static void OnClientJoined( Client client )
 	{
-		var position = Characters.GetData( client, "LastPosition");
+		var map = Characters.GetData( client, "LastMap" );
+		var position = Characters.GetData( client, "LastPosition" );
 
-		Log.Info(position);
-
-		if ( !string.IsNullOrWhiteSpace( position ) )
+		if ( !string.IsNullOrWhiteSpace( position ) && !string.IsNullOrWhiteSpace( position ) && map == Global.MapName )
 		{
 			var data = position.Split( "," );
 
@@ -31,6 +30,7 @@ internal class SavePositions : Game
 	[Event( "OnClientDisconnect" )]
 	public static void OnClientDisconnect( Client client, NetworkDisconnectionReason _ )
 	{
+		Characters.SetData( client, "LastMap", Global.MapName );
 		Characters.SetData( client, "LastPosition", client.Pawn.Position.ToString() );
 	}
 }
