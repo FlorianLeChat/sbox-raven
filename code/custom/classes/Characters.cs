@@ -47,12 +47,13 @@ namespace Raven
 		{
 			if ( ServerCache.TryGetValue( client.SteamId, out var cache ) )
 			{
-				return cache[ key ];
+				if ( cache.TryGetValue( key, out var value ) )
+				{
+					return value;
+				}
 			}
-			else
-			{
-				return fallback;
-			}
+
+			return fallback;
 		}
 
 		/// <summary>
