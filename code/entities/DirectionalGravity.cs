@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 using System.Linq;
 
 [Library( "directional_gravity", Title = "Directional Gravity", Spawnable = true )]
@@ -42,7 +42,7 @@ public partial class DirectionalGravity : Prop
 	}
 
 	[Event.Physics.PostStep]
-	public void OnPostPhysicsStep()
+	protected void UpdateGravity()
 	{
 		if ( !IsServer )
 			return;

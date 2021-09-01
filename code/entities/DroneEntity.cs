@@ -1,4 +1,4 @@
-﻿using Sandbox;
+using Sandbox;
 using System;
 
 [Library( "ent_drone", Title = "Drone", Spawnable = true )]
@@ -38,7 +38,7 @@ public partial class DroneEntity : Prop
 	}
 
 	[Event.Physics.PostStep]
-	public void OnPostPhysicsStep()
+	protected void ApplyForces()
 	{
 		if ( !PhysicsBody.IsValid() )
 		{
